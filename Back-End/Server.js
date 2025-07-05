@@ -1,32 +1,24 @@
+// server.js
 import express from 'express';
 import dotenv from 'dotenv';
-
-import userRoutes from '../Back-End/Router/UserRoute.js';
-import productRoutes from "../Back-End/Router/productRoute.js"
+import userRoutes from './Router/UserRoute.js';
+import productRoutes from "./Router/productRoute.js";
 import connect from './config/db.js';
 import cors from "cors";
-dotenv.config();
-connect()
 
+dotenv.config();
+connect();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// CORS
-
+// Middlewares
 app.use(cors());
-
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Main Route
+// Routes
 app.use('/users', userRoutes);
 app.use('/api/products', productRoutes);
 
-
-// Server Start
-app.listen(PORT, () => {
-    console.log(`✅ Server is running on port ${PORT}`);
-});
+// ✅ Export the app only
+export default app;
