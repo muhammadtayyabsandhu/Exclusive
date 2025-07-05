@@ -1,0 +1,159 @@
+import React, { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+
+const Signup = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    emailOrPhone: "",
+    password: "",
+  });
+
+  
+
+  const [errors, setErrors] = useState({
+    name: "",
+    emailOrPhone: "",
+    password: "",
+  });
+
+  const validateForm = () => {
+    let tempErrors = { name: "", emailOrPhone: "", password: "" };
+    let isValid = true;
+
+    // Name validation
+    if (!formData.name.trim()) {
+      tempErrors.name = "Name is required";
+      isValid = false;
+    } else if (formData.name.length < 3) {
+      tempErrors.name = "Name must be at least 3 characters long";
+      isValid = false;
+    }
+
+    // Email or phone validation (basic regex for email and phone check)
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^[0-9]{10,15}$/;
+    if (!formData.emailOrPhone.trim()) {
+      tempErrors.emailOrPhone = "Email or Phone is required";
+      isValid = false;
+    } else if (
+      !emailPattern.test(formData.emailOrPhone) &&
+      !phonePattern.test(formData.emailOrPhone)
+    ) {
+      tempErrors.emailOrPhone = "Enter a valid Email or Phone Number";
+      isValid = false;
+    }
+
+    // Password validation
+    if (!formData.password.trim()) {
+      tempErrors.password = "Password is required";
+      isValid = false;
+    } else if (formData.password.length < 6) {
+      tempErrors.password = "Password must be at least 6 characters long";
+      isValid = false;
+    }
+
+    setErrors(tempErrors);
+    return isValid;
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" }); // Clear error when typing
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      console.log("Form Data:", formData);
+      // TODO: Backend/Firebase call here
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col md:flex-row">
+      {/* Left Side (Image) */}
+      <div className="flex-1 hidden md:flex items-center justify-center bg-gray-50">
+        <img
+          src="src\\assets\\Images\\Side Image.png"
+          alt="Sign Up"
+          className="max-w-sm"
+        />
+      </div>
+
+      {/* Right Side (Form) */}
+      <div className="flex-1 flex items-center justify-center p-8 bg-white">
+        <div className="w-full max-w-md">
+          <h2 className="text-3xl font-semibold mb-2">Create an account</h2>
+          <p className="text-gray-500 mb-6">Enter your details below</p>
+
+          {/* Form Start */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
+              />
+              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+            </div>
+
+            <div>
+              <input
+                type="text"
+                name="emailOrPhone"
+                placeholder="Email or Phone Number"
+                value={formData.emailOrPhone}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
+              />
+              {errors.emailOrPhone && <p className="text-red-500 text-sm mt-1">{errors.emailOrPhone}</p>}
+            </div>
+
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
+              />
+              {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-red-500 text-white py-3 rounded-md hover:bg-red-600 transition-colors"
+            >
+              Create Account
+            </button>
+          </form>
+
+          {/* Google Sign-Up Button */}
+          <div className="mt-4">
+            <button
+              type="button"
+              className="flex items-center justify-center gap-2 w-full border border-gray-300 py-3 rounded-md hover:bg-gray-100 transition-colors"
+            >
+              <FcGoogle className="text-xl" />
+              Sign up with Google
+            </button>
+          </div>
+
+          {/* Already have an account */}
+          <p className="text-sm text-center mt-4">
+            Already have an account?{" "}
+            <a href="/login" className="text-red-500 hover:underline">
+              Log in
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Signup;
