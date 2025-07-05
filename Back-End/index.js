@@ -1,8 +1,20 @@
-// index.js
-import app from "../Back-End/server";
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import connect from "./config/db.js";
+import userRoutes from "./Router/UserRoute.js";
+import productRoutes from "./Router/productRoute.js";
 
-const PORT = process.env.PORT || 3000;
+dotenv.config();
+connect();
 
-app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
-});
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/users", userRoutes);
+app.use("/api/products", productRoutes);
+
+export default app;
