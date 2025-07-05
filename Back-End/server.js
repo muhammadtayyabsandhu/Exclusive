@@ -19,4 +19,5 @@ app.use("/api/products", productRoutes);
 app.get("/", (req, res) => {
   res.send("🎉 Backend is live and running!");
 });
+
 export default app;
