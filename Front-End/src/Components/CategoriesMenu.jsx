@@ -2,31 +2,44 @@ import React from "react";
 
 export default function CategoriesMenu() {
   const categories = [
-    "Women's Fashion",
-    "Men's Fashion",
-    "Electronics",
-    "Home & Lifestyle",
-    "Medicine",
-    "Sports & Outdoor",
-    "Baby & Toys",
-    "Groceries & Pets",
-    "Health & Beauty",
+    "Chocolate Bouquet",
+    "Flower Bouquet",
+    "Money Bouquet",
+    "Makeup Bouquet",
+    "Gift Basket",
+    "Eid Basket",
+    "Fresh Flowers",
   ];
 
   return (
-    <div className="bg-white p-4 w-full md:w-60 border-r border-gray-200">
-      <ul className="space-y-2">
-        {categories.map((cat) => (
-          <li key={cat}>
-            <a
-              href="#"
-              className="block py-1 px-2 hover:bg-gray-100 hover:text-blue-500 rounded"
-            >
-              {cat}
-            </a>
-          </li>
-        ))}
-      </ul>
+    <div className="w-full md:w-64 p-4">
+      <div
+        className="
+          bg-pink-100/30 backdrop-blur-lg
+          border border-pink-200/40 
+          rounded-2xl p-5
+        "
+      >
+        <h2 className="text-2xl font-bold text-black mb-4 text-center">
+          Categories
+        </h2>
+        <ul className="divide-y divide-pink-300/40">
+          {categories.map((cat, idx) => (
+            <li key={idx}>
+              <a
+                href="#"
+                className="
+                  block w-full py-3 text-black font-medium
+                  hover:bg-white/40 hover:text-pink-700
+                  transition duration-300 text-center
+                "
+              >
+                {cat}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

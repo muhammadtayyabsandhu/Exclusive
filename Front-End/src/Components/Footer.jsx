@@ -1,9 +1,5 @@
 import React from "react";
 import {
-  AiOutlineArrowRight,
-  AiOutlineEnvironment,
-  AiOutlineMail,
-  AiOutlinePhone,
   AiFillFacebook,
   AiFillTwitterSquare,
   AiFillInstagram,
@@ -12,170 +8,88 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white pt-10 pb-6">
-      {/* Top Section: 5 Columns */}
-      <div
-        className="
-          max-w-7xl mx-auto px-4
-          grid grid-cols-1 md:grid-cols-5 gap-8
-          text-center md:text-left
-          justify-items-center md:justify-items-start
-          items-center md:items-start
-        "
+    <footer className="relative pt-24 pb-10 text-gray-800">
+      {/* 🌊 Decorative top wave */}
+      <svg
+        className="absolute top-0 left-0 w-full h-20 md:h-32 rotate-180"
+        viewBox="0 0 1440 320"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        {/* ----- Column 1: Exclusive / Subscribe ----- */}
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Exclusive</h2>
-          <p className="mb-4">Subscribe</p>
-          <p className="text-sm mb-4">Get 10% off your First order</p>
-          <div className="flex items-center justify-center md:justify-start">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full bg-gray-800 text-white px-3 py-2 rounded-l focus:outline-none"
-            />
-            <button className="bg-white text-black px-3 py-2 rounded-r hover:bg-gray-200 transition">
-              <AiOutlineArrowRight />
-            </button>
-          </div>
-        </div>
+        <path
+          fill="#fce7f3"
+          d="M0,96L60,122.7C120,149,240,203,360,213.3C480,224,600,192,720,170.7C840,149,960,139,1080,154.7C1200,171,1320,213,1380,234.7L1440,256V0H1380C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0H0Z"
+        />
+      </svg>
 
-        {/* ----- Column 2: Support ----- */}
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Support</h2>
-          {/* Address */}
-          <div className="flex items-start gap-2 mb-1 justify-center md:justify-start">
-            <AiOutlineEnvironment className="mt-1" />
-            <p className="text-sm leading-5">
-              111 Bijoy sarani, Dhaka, <br />
-              DH-1236, Bangladesh
+      {/* 🎀 Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-pink-100 to-pink-50" />
+
+      {/* 🪟 Glass card */}
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="backdrop-blur-md bg-white/60 rounded-3xl shadow-xl p-10 grid gap-8
+                        grid-cols-1 md:grid-cols-3 text-center md:text-left">
+          {/* Brand / About */}
+          <div>
+            <h2 className="text-3xl font-extrabold text-pink-600 mb-2">
+              Bloom&nbsp;&amp;&nbsp;Beyond
+            </h2>
+            <p className="text-sm leading-relaxed">
+              Hand‑crafted bouquets, baskets&nbsp;and gifts —
+              spreading joy one bloom at a time.
             </p>
           </div>
-          {/* Email */}
-          <div className="flex items-center gap-2 mb-1 justify-center md:justify-start">
-            <AiOutlineMail />
-            <p className="text-sm">exclusive@gmail.com</p>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Navigate</h3>
+            <ul className="space-y-1 text-sm">
+              <li><a href="#" className="hover:text-pink-600">Home</a></li>
+              <li><a href="#" className="hover:text-pink-600">Shop</a></li>
+              <li><a href="#" className="hover:text-pink-600">My&nbsp;Account</a></li>
+              <li><a href="#" className="hover:text-pink-600">Contact</a></li>
+              <li><a href="#" className="hover:text-pink-600">FAQs</a></li>
+            </ul>
           </div>
-          {/* Phone */}
-          <div className="flex items-center gap-2 mb-1 justify-center md:justify-start">
-            <AiOutlinePhone />
-            <p className="text-sm">+88015-88888-9999</p>
-          </div>
-        </div>
 
-        {/* ----- Column 3: Account ----- */}
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Account</h2>
-          <ul className="space-y-1 text-sm">
-            <li>
-              <a href="#" className="hover:text-gray-300 transition">
-                My Account
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-gray-300 transition">
-                Login / Register
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-gray-300 transition">
-                Cart
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-gray-300 transition">
-                Wishlist
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-gray-300 transition">
-                Shop
-              </a>
-            </li>
-          </ul>
-        </div>
+          {/* Social + Newsletter */}
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-lg font-semibold mb-3">Stay Connected</h3>
 
-        {/* ----- Column 4: Quick Link ----- */}
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Quick Link</h2>
-          <ul className="space-y-1 text-sm">
-            <li>
-              <a href="#" className="hover:text-gray-300 transition">
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-gray-300 transition">
-                Terms Of Use
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-gray-300 transition">
-                FAQ
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-gray-300 transition">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
+            {/* Social icons */}
+            <div className="flex space-x-4 mb-6 text-2xl text-pink-600">
+              {[AiFillFacebook, AiFillTwitterSquare, AiFillInstagram, AiFillLinkedin].map(
+                (Icon, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    className="transform hover:scale-110 transition duration-300"
+                  >
+                    <Icon />
+                  </a>
+                )
+              )}
+            </div>
 
-        {/* ----- Column 5: Download App ----- */}
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Download App</h2>
-          <p className="text-sm mb-3">Save up to 50% on your first order only</p>
-
-          {/* Buttons: Play Store & App Store */}
-          <div className="flex space-x-2 mb-3 justify-center md:justify-start">
-            <a href="#" className="inline-block">
-              <img
-                src="/path/to/playstore.png"
-                alt="Google Play"
-                className="h-10 object-cover"
+            {/* Mini newsletter input */}
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="w-full flex bg-white rounded-full overflow-hidden shadow"
+            >
+              <input
+                type="email"
+                placeholder="Email address"
+                className="flex-1 px-4 py-2 text-sm focus:outline-none"
               />
-            </a>
-            <a href="#" className="inline-block">
-              <img
-                src="/path/to/appstore.png"
-                alt="App Store"
-                className="h-10 object-cover"
-              />
-            </a>
-          </div>
-
-          {/* QR Code (Placeholder) */}
-          <div className="bg-white p-2 inline-block mb-3">
-            <img
-              src="https://via.placeholder.com/80x80?text=QR+Code"
-              alt="QR Code"
-              className="h-20 w-20 object-cover"
-            />
-          </div>
-
-          {/* Social Icons */}
-          <div className="flex items-center space-x-2 justify-center md:justify-start">
-            <a href="#" className="hover:text-gray-400 transition">
-              <AiFillFacebook className="text-2xl" />
-            </a>
-            <a href="#" className="hover:text-gray-400 transition">
-              <AiFillTwitterSquare className="text-2xl" />
-            </a>
-            <a href="#" className="hover:text-gray-400 transition">
-              <AiFillInstagram className="text-2xl" />
-            </a>
-            <a href="#" className="hover:text-gray-400 transition">
-              <AiFillLinkedin className="text-2xl" />
-            </a>
+              <button className="bg-pink-600 text-white px-4 hover:bg-pink-700">
+                Join
+              </button>
+            </form>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Section */}
-      <div className="max-w-7xl mx-auto px-4 mt-8 border-t border-gray-700 pt-4 flex flex-col items-center justify-center">
-        <p className="text-xs text-gray-400">
-          © Copyright Ritmel 2022. All right reserved
+        {/* Bottom line */}
+        <p className="mt-8 text-center text-xs text-gray-600">
+          © {new Date().getFullYear()} Bloom &amp; Beyond. All rights reserved.
         </p>
       </div>
     </footer>

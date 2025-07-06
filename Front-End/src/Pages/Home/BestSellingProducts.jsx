@@ -55,7 +55,7 @@ export default function BestSellingProducts() {
       </div>
 
       <div className="flex justify-between items-center mt-2">
-        <h1 className="text-3xl font-bold">Best Selling Products</h1>
+        <h1 className="text-3xl font-bold">Bouquets</h1>
         <button className="px-6 py-2 bg-red-500 text-white rounded-lg">
           View All
         </button>
