@@ -16,8 +16,5 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", userRoutes);
 app.use("/api/products", productRoutes);
-app.get("/", (req, res) => {
-  res.send("🎉 Backend is live and running!");
-});
 
 export default app;
