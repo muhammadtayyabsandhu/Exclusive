@@ -27,7 +27,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-        const res = await axios.post("http://localhost:3000/users/signup", formData);
+        const res = await axios.post("https://backend-rho-weld.vercel.app/users/signup", formData);
 
         if (res.status === 200 || res.status === 201) {
            alert("Your Regestration has succesfully")
