@@ -37,11 +37,12 @@ const products = [
 export default function ProductCarousel() {
   return (
     <section className="py-8 bg-pink-50">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 ">
         {/* Section Heading */}
-        <h2 className="text-3xl font-bold text-black mb-6">
-          Gift Bouquet
-        </h2>
+       <div className="flex items-center gap-2 mb-3">
+        <div className="bg-pink-500 w-2 h-6 rounded-sm py-4"></div>
+        <h2 className="text-xl font-bold text-pink-700">Gift Bouquet</h2>
+      </div>
 
         {/* Horizontal scroll container */}
         <div
