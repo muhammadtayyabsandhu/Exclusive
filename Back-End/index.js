@@ -16,6 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/users", userRoutes);
 app.use("/api/products", productRoutes);
+app.get("/", (req, res) => {
+  res.send("✅ Backend API is Live!");
+});
 
 export default async function handler(req, res) {
   try {
