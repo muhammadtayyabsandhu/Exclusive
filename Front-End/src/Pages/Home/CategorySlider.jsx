@@ -6,29 +6,25 @@ import {
   FaMoneyBillWave,
   FaLeaf,
   FaBoxOpen,
-  FaBirthdayCake,
-  FaSmile,
   FaRegHeart,
-  FaHandHoldingHeart,
   FaArrowLeft,
   FaArrowRight,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // navigation hook
 
 const categories = [
-  { id: 1, name: "Chocolate Bouquet", icon: <FaGift size={24} /> },
-  { id: 2, name: "Flower Bouquet", icon: <FaSpa size={24} /> },
-  { id: 3, name: "Money Bouquet", icon: <FaMoneyBillWave size={24} /> },
-  { id: 4, name: "Makeup Bouquet", icon: <FaLeaf size={24} /> },
-  { id: 5, name: "Eidi Bouquet", icon: <FaSmile size={24} /> },
-  { id: 6, name: "Gift Basket", icon: <FaBoxOpen size={24} /> },
-  { id: 7, name: "Eid Basket", icon: <FaBirthdayCake size={24} /> },
-  { id: 8, name: "Fresh Flowers", icon: <FaRegHeart size={24} /> },
-  { id: 9, name: "Custom Gifts", icon: <FaHandHoldingHeart size={24} /> },
+  { id: 1, name: "Chocolate Bouquet", icon: <FaGift size={24} />, path: "/chocolate-bouquet" },
+  { id: 2, name: "Flower Bouquet", icon: <FaSpa size={24} />, path: "/flower-bouquet" },
+  { id: 3, name: "Money Bouquet", icon: <FaMoneyBillWave size={24} />, path: "/money-bouquet" },
+  { id: 4, name: "Makeup Bouquet", icon: <FaLeaf size={24} />, path: "/makeup-bouquet" },
+  { id: 5, name: "Gift Basket", icon: <FaBoxOpen size={24} />, path: "/gift-basket" },
+  { id: 6, name: "Fresh Flowers", icon: <FaRegHeart size={24} />, path: "/fresh-flowers" },
 ];
 
 export default function CategorySlider() {
   const scrollRef = useRef(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const navigate = useNavigate();
 
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -200, behavior: "smooth" });
@@ -39,7 +35,7 @@ export default function CategorySlider() {
   };
 
   return (
-    <div className="p-6 bg-pink-50 rounded-xl">
+    <div className="px-4 pt-4 bg-pink-50">
       {/* Heading with pink badge */}
       <div className="flex items-center gap-2 mb-3">
         <div className="bg-pink-500 w-2 h-6 rounded-sm"></div>
@@ -72,11 +68,15 @@ export default function CategorySlider() {
         <div
           ref={scrollRef}
           className="flex gap-4 overflow-x-auto scrollbar-hide"
+          style={{ scrollSnapType: "x mandatory" }}
         >
           {categories.map((category) => (
             <button
               key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
+              onClick={() => {
+                setSelectedCategory(category.id);
+                navigate(category.path); // navigate to product page
+              }}
               className={`flex flex-col items-center justify-center w-36 p-5 rounded-xl border
                 text-sm font-semibold transition duration-300
                 ${

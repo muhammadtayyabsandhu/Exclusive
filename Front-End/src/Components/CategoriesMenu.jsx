@@ -1,14 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function CategoriesMenu() {
   const categories = [
-    "Chocolate Bouquet",
-    "Flower Bouquet",
-    "Money Bouquet",
-    "Makeup Bouquet",
-    "Gift Basket",
-    "Eid Basket",
-    "Fresh Flowers",
+    { name: "Chocolate Bouquet", path: "/chocolate-bouquet" },
+    { name: "Flower Bouquet", path: "/flower-bouquet" },
+    { name: "Money Bouquet", path: "/money-bouquet" },
+    { name: "Makeup Bouquet", path: "/makeup-bouquet" },
+    { name: "Gift Basket", path: "/gift-basket" },
+    { name: "Fresh Flowers", path: "/fresh-flowers" },
   ];
 
   return (
@@ -26,16 +26,17 @@ export default function CategoriesMenu() {
         <ul className="divide-y divide-pink-300/40">
           {categories.map((cat, idx) => (
             <li key={idx}>
-              <a
-                href="#"
+              <Link
+                to={cat.path}
                 className="
                   block w-full py-3 text-black font-medium
                   hover:bg-white/40 hover:text-pink-700
                   transition duration-300 text-center
                 "
               >
-                {cat}
-              </a>
+                {cat.name}
+              </Link>
+            
             </li>
           ))}
         </ul>

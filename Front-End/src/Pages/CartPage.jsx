@@ -51,9 +51,9 @@ export default function CartPage() {
                 <div className="border border-gray-300 p-6 w-full md:w-1/3 bg-white shadow-sm">
                     <h2 className="font-bold text-2xl mb-4 text-gray-800">Cart Total</h2>
                     <div className="space-y-2 text-gray-700">
-                        <p className="flex justify-between">Subtotal: <span>${subtotal}</span></p>
+                        <p className="flex justify-between">Subtotal: <span>Rs:{subtotal}</span></p>
                         <p className="flex justify-between">Shipping: <span>Free</span></p>
-                        <p className="flex justify-between font-bold text-xl">Total: <span>${subtotal}</span></p>
+                        <p className="flex justify-between font-bold text-xl">Total: <span>Rs:{subtotal}</span></p>
                     </div>
                     <button className="bg-red-500 text-white w-full py-3 mt-4 font-medium hover:bg-red-600">
                         Proceed to Checkout
