@@ -5,7 +5,6 @@ import {
   AiOutlineSearch,
   AiOutlineHeart,
   AiOutlineShoppingCart,
-
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -14,8 +13,6 @@ import TopHeader from "./TopHeader";
 import UserDropdown from "./UserDropdown";
 
 export default function Header() {
-  const auth = localStorage.getItem("user");
-
   const [navOpen, setNavOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
@@ -94,15 +91,7 @@ export default function Header() {
                 </Link>
               ))}
 
-              {auth ? null : (
-                <Link to="/signup" className="relative group">
-                  Signup
-                  <motion.div
-                    className="absolute bottom-0 left-0 w-full h-[2px] bg-purple-500 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300"
-                    layoutId="underline"
-                  />
-                </Link>
-              )}
+  
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">

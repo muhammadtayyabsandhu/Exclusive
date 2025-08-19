@@ -50,7 +50,7 @@ const HeroBanner = () => {
       <div className="z-10 space-y-4 text-center md:text-left">
         <h3 className="text-green-500 font-bold text-sm md:text-lg">Categories</h3>
         <h1 className="text-white text-3xl md:text-5xl font-bold leading-snug md:leading-tight">
-          Enhance Your <br /> Music Experience
+         Elegant blooms crafted  <br /> for every occasion
         </h1>
 
         {/* Countdown Timer */}
@@ -76,9 +76,9 @@ const HeroBanner = () => {
       {/* Right Product Image */}
       <div className="z-10 mt-6 md:mt-0">
         <img
-          src="src/assets/Images/Frame 694.png"
+          src="https://res.cloudinary.com/dyfgyhy2v/image/upload/v1755573574/Adobe_Express_-_file_a86yxp.png"
           alt="JBL Speaker"
-          className="h-[200px] md:h-[300px] object-contain"
+          className="h-[500px] md:h-[500px] object-contain"
         />
       </div>
     </div>

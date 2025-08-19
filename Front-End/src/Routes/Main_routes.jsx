@@ -9,14 +9,14 @@ import Layout from '../Layout/Layout'
 import Home from '../Pages/Home/Home'
 import CartPage from '../Pages/CartPage';
 import Login from '../Pages/Login/Login'
-import PrivateRoute from '../Components/Auth/PrivateRoute'
+
 import ProductDetailPage from '../Pages/Product Detail page/ProductDetailPage'
 const Main_routes = () => {
   return (
    <>
    <Routes>
     <Route element={<Layout/>}>
-    <Route element={<PrivateRoute/>}>
+    
 
      <Route path='/' element={<Home/>}/>
      <Route path='/about' element={<About/>} />
@@ -26,7 +26,7 @@ const Main_routes = () => {
      <Route path='*' element={<PageNotFound/>} />
      <Route path="/product/:id" element={<ProductDetailPage/>} />
 
-    </Route>
+
     
 
      <Route path='/signup' element={<Signup/>} />
