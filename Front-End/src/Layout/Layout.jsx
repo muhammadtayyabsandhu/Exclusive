@@ -1,8 +1,9 @@
 import React from 'react'
-import TopHeader from '../Components/TopHeader'
+
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import { Outlet } from 'react-router'
+import PopupForm from '../Components/PopupForm'
 
 const Layout = () => {
   return (
@@ -11,6 +12,7 @@ const Layout = () => {
 <Header/>
 <main>
   <Outlet/>
+  <PopupForm/>
 </main>
 <Footer/>
 </>  )
