@@ -79,7 +79,7 @@ export default function ProductCarousel() {
               <img
                 src={p.image}
                 alt={p.name}
-                className="h-40 w-full object-contain rounded-t-2xl"
+                className="h-40 w-full object-cover rounded-t-2xl"
               />
 
               <div className="p-4 text-center">

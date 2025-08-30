@@ -1,35 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import hero1 from "../assets/Images/flower/f1.jpg";
-import hero2 from "../assets/Images/flower/f2.jpg";
-import hero3 from "../assets/Images/flower/f3.jpg";
+import hero1 from "../assets/Images/flower/f8.jpg";
+import hero2 from "../assets/Images/flower/f7.jpg";
+import hero3 from "../assets/Images/flower/f6.jpg";
 
-const slidesData = [
-  {
-    id: 1,
-   title: "Blooming Deals Just for You",
-subtitle: "Get Up to 10% OFF on All Bouquets & Gifts",
-    cta: "Shop Now",
-    imageUrl: hero1,
-    bgColor: "#000000",
-  },
-  {
-    id: 2,
-    title: "Fresh Flowers, Fresh Offers",
-subtitle: "Enjoy 10% OFF – Limited Time Only!",
-    cta: "Buy Now",
-    imageUrl: hero2,
-    bgColor: "#000000",
-  },
-  {
-    id: 3,
-   title: "Gifts That Speak from the Heart",
-subtitle: "Up to 10% OFF on Personalized Floral Gifts",
-    cta: "View Details",
-    imageUrl: hero3,
-    bgColor: "#000000",
-  },
-];
+const slidesData = [hero1, hero2, hero3];
 
 export default function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -49,44 +24,31 @@ export default function Slider() {
         className="flex transition-transform duration-700 ease-in-out h-full"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
-        {slidesData.map((slide) => (
-          <div
-            key={slide.id}
-            className="min-w-full flex items-center h-full"
-            style={{ backgroundColor: slide.bgColor }}
-          >
-            {/* Left Text Section */}
-            <div className="flex-1 text-white px-8 md:px-16 space-y-3 md:space-y-5">
-              {/* Apple icon + Title */}
-              <div className="flex items-center space-x-2 mt-4 md:mt-0">
-               
-                <h2 className="text-xl md:text-3xl font-semibold">
-                  {slide.title}
-                </h2>
-              </div>
-              {/* Subtitle */}
-              <p className="text-lg md:text-2xl font-light">{slide.subtitle}</p>
-              {/* CTA Button with underline on hover */}
-              <button className="inline-flex items-center space-x-2 bg-black text-white py-2 px-4 rounded group transition">
-                <span className="group-hover:underline">{slide.cta}</span>
-                <span className="text-xl">&rarr;</span>
-              </button>
-            </div>
-
-            {/* Right Image Section */}
-            <div className="flex-1 flex justify-center items-center p-4">
-              <img
-                src={slide.imageUrl}
-                alt={slide.title}
-                className="object-contain h-56 md:h-72"
-              />
-            </div>
+        {slidesData.map((image, index) => (
+          <div key={index} className="min-w-full h-full relative">
+            <img
+              src={image}
+              alt={`slide-${index}`}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           </div>
         ))}
       </div>
 
+      {/* Right side line + button */}
+      <div className="absolute right-6 bottom-12 text-right z-20">
+        <p className="text-black md:text-lg font-semibold">
+          🌸 Fresh Flowers, Fresh Smiles
+        </p>
+        <div className="flex justify-end pr-12">
+          <button className="mt-2 bg-black text-white  px-5 py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
+            Shop Now
+          </button>
+        </div>
+      </div>
+
       {/* Dots (Indicators) */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-3">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
         {slidesData.map((_, index) => (
           <div
             key={index}

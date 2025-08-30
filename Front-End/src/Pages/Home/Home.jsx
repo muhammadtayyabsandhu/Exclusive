@@ -14,9 +14,9 @@ const Home = () => {
     <>
     <HomeSection/>
     <ProductCarousel/>
-    <FlashSales/>
+    {/* <FlashSales/> */}
     <CategorySlider/>
-    <BestSellingProducts/>
+    {/* <BestSellingProducts/> */}
     <GiftBasketsSection/>
     <HeroBanner/>
     <ProductSection/>

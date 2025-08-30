@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import logo from "../assets/Images/logo.png"
 import {
   AiOutlineMenu,
   AiOutlineClose,
@@ -78,10 +79,24 @@ export default function Header() {
 
         <header className="w-full bg-white">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div className="text-xl font-bold">Bloom and Beyond</div>
+           <div className="text-xl font-bold">
+  <Link to="/">
+   <div className="flex items-center h-10"> 
+  <Link to="/">
+    <img
+      src={logo}
+      alt="Bloom and Beyond Logo"
+      className="h-full max-h-50 w-auto object-contain"
+    />
+  </Link>
+</div>
+  </Link>
+</div>
 
+
+            {/* ✅ Desktop Navigation */}
             <nav className="hidden md:flex space-x-6 text-gray-700">
-              {["/", "/about", "/contact"].map((path, index) => (
+              {["/", "/shop", "/about", "/contact"].map((path, index) => (
                 <Link key={index} to={path} className="relative group">
                   {path.replace("/", "") || "Home"}
                   <motion.div
@@ -90,8 +105,6 @@ export default function Header() {
                   />
                 </Link>
               ))}
-
-  
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
@@ -130,6 +143,7 @@ export default function Header() {
             </div>
           </div>
 
+          {/* ✅ Mobile Navigation */}
           <div
             className={`md:hidden flex flex-col items-center space-y-4 bg-white py-4 transition-all duration-500 ${
               navOpen
@@ -137,18 +151,11 @@ export default function Header() {
                 : "max-h-0 opacity-0 overflow-hidden"
             }`}
           >
-            <Link to="/" onClick={() => setNavOpen(false)}>
-              Home
-            </Link>
-            <Link to="/about" onClick={() => setNavOpen(false)}>
-              About
-            </Link>
-            <Link to="/contact" onClick={() => setNavOpen(false)}>
-              Contact
-            </Link>
-            <Link to="/signup" onClick={() => setNavOpen(false)}>
-              Signup
-            </Link>
+            <Link to="/" onClick={() => setNavOpen(false)}>Home</Link>
+            <Link to="/shop" onClick={() => setNavOpen(false)}>Shop</Link>
+            <Link to="/about" onClick={() => setNavOpen(false)}>About</Link>
+            <Link to="/contact" onClick={() => setNavOpen(false)}>Contact</Link>
+            <Link to="/signup" onClick={() => setNavOpen(false)}>Signup</Link>
           </div>
         </header>
       </div>

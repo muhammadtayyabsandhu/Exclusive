@@ -1,6 +1,7 @@
 import { FaShippingFast, FaHeadset } from "react-icons/fa";
 import { MdOutlineVerified } from "react-icons/md";
 import React from "react";
+
 const FeatureSection = () => {
   const features = [
     {
@@ -21,10 +22,10 @@ const FeatureSection = () => {
   ];
 
   return (
-    <div className="flex justify-center items-center gap-10 py-10">
+    <div className="flex flex-col sm:flex-row justify-center items-center gap-10 py-10 mb-10">
       {features.map((feature, index) => (
         <div key={index} className="flex flex-col items-center text-center">
-          <div className="w-16 h-16 flex items-center justify-center bg-black rounded-full">
+          <div className="w-16 h-16 flex items-center justify-center bg-pink-200 rounded-full ">
             {feature.icon}
           </div>
           <h3 className="font-bold mt-4">{feature.title}</h3>

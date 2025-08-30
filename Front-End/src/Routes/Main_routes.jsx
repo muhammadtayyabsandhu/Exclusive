@@ -17,6 +17,7 @@ import Money from '../Pages/Categories/Money'
 import Makeup from '../Pages/Categories/Makeup'
 import Gift from '../Pages/Categories/Gift'
 import Fresh from '../Pages/Categories/Fresh'
+import Shop from '../Pages/Shop/Shop'
 const Main_routes = () => {
   return (
    <>
@@ -36,6 +37,7 @@ const Main_routes = () => {
      <Route path='/makeup-bouquet' element={<Makeup/>} />
      <Route path='/gift-basket' element={<Gift/>} />
      <Route path='/fresh-flowers' element={<Fresh/>} />
+     <Route path='/shop' element={<Shop/>} />
      <Route path="/product/:id" element={<ProductDetailPage/>} />
 
 
