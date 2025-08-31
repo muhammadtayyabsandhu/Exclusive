@@ -34,7 +34,7 @@ export default function GiftBasketsSection() {
           </p>
 
           <a
-            href="#shop-baskets"
+            href="/shop"
             className="inline-block mt-6 bg-emerald-600 text-white font-semibold px-6 py-2.5 rounded-full shadow hover:bg-emerald-700 transition"
           >
             Shop Now

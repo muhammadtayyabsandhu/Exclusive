@@ -24,7 +24,7 @@ const stats = [
     id: 4,
     icon: <FaCoins />,
     value: "25k",
-    label: "Annual gross sale in our site",
+    label: "Annual gross sale on our site",
   },
 ];
 
@@ -38,11 +38,14 @@ const StatsSection = () => {
             key={stat.id}
             className="
               group 
-              border border-gray-200 
-              rounded-lg p-6 
+              border border-pink-200 
+              rounded-2xl p-6 
               flex flex-col items-center text-center
-              transition-colors duration-300
-              hover:bg-red-500 hover:text-white
+              bg-gradient-to-b from-pink-50 to-white
+              shadow-md
+              transition-all duration-500
+              hover:bg-gradient-to-tr hover:from-pink-500 hover:to-rose-400 
+              hover:text-white hover:shadow-xl hover:scale-105
             "
           >
             {/* Icon Circle */}
@@ -50,17 +53,18 @@ const StatsSection = () => {
               className="
                 w-16 h-16 
                 flex items-center justify-center 
-                bg-black text-white 
-                rounded-full mb-4
-                transition-colors duration-300
-                group-hover:bg-white group-hover:text-black
+                bg-pink-500 text-white 
+                rounded-full mb-4 text-2xl
+                transition-all duration-500
+                group-hover:bg-white group-hover:text-pink-600
+                shadow-md
               "
             >
               {stat.icon}
             </div>
 
             {/* Stat Value */}
-            <h3 className="text-2xl font-bold mb-2">{stat.value}</h3>
+            <h3 className="text-3xl font-bold mb-2">{stat.value}</h3>
             {/* Label */}
             <p className="text-sm">{stat.label}</p>
           </div>

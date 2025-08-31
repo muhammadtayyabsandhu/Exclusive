@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 export default function CategoriesMenu() {
   const categories = [
-    { name: "Chocolate Bouquet", path: "/chocolate-bouquet" },
-    { name: "Flower Bouquet", path: "/flower-bouquet" },
-    { name: "Money Bouquet", path: "/money-bouquet" },
-    { name: "Makeup Bouquet", path: "/makeup-bouquet" },
-    { name: "Gift Basket", path: "/gift-basket" },
-    { name: "Fresh Flowers", path: "/fresh-flowers" },
+    { name: "Chocolate Bouquet", value: "chocolate" },
+    { name: "Flower Bouquet", value: "flower" },
+    { name: "Money Bouquet", value: "money" },
+    { name: "Makeup Bouquet", value: "makeup" },
+    { name: "Gift Basket", value: "gift" },
+    { name: "Fresh Flowers", value: "fresh" },
   ];
 
   return (
@@ -26,8 +26,9 @@ export default function CategoriesMenu() {
         <ul className="divide-y divide-pink-300/40">
           {categories.map((cat, idx) => (
             <li key={idx}>
+              {/* Shop page ke andar query param bhejenge */}
               <Link
-                to={cat.path}
+                to={`/shop?category=${cat.value}`}
                 className="
                   block w-full py-3 text-black font-medium
                   hover:bg-white/40 hover:text-pink-700
@@ -36,7 +37,6 @@ export default function CategoriesMenu() {
               >
                 {cat.name}
               </Link>
-            
             </li>
           ))}
         </ul>

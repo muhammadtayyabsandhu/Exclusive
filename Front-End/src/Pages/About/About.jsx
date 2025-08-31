@@ -1,7 +1,7 @@
 import React from 'react'
 import Story from './Story'
 import StatsSection from './StatsSection'
-import TeamSlider from './TeamSlider'
+
 import FeatureSection from '../Home/FeatureSection'
 
 const About = () => {
@@ -10,7 +10,7 @@ const About = () => {
    
     <Story/>
     <StatsSection/>
-    <TeamSlider/>
+
     <FeatureSection/>
     </>
   )

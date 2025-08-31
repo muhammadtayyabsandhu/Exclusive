@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom"; 
 import hero1 from "../assets/Images/flower/f8.jpg";
 import hero2 from "../assets/Images/flower/f7.jpg";
 import hero3 from "../assets/Images/flower/f6.jpg";
@@ -8,7 +8,7 @@ const slidesData = [hero1, hero2, hero3];
 
 export default function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const navigate = useNavigate(); 
   // Auto-rotate every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,7 +41,10 @@ export default function Slider() {
           🌸 Fresh Flowers, Fresh Smiles
         </p>
         <div className="flex justify-end pr-12">
-          <button className="mt-2 bg-black text-white  px-5 py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
+              <button
+            onClick={() => navigate("/shop")} // 👈 navigate to shop
+            className="mt-2 bg-black text-white px-5 py-2 rounded-lg shadow-md hover:bg-gray-800 transition"
+          >
             Shop Now
           </button>
         </div>

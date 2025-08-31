@@ -1,10 +1,10 @@
 import React from 'react'
 import HomeSection from '../../Components/HomeSection'
-import FlashSales from './FlashSales'
+
 import CategorySlider from './CategorySlider'
-import BestSellingProducts from './BestSellingProducts'
+
 import HeroBanner from './HeroBanner'
-import ProductSection from './ProductSection'
+
 import NewArrivalSection from './NewArrivalSection'
 import FeatureSection from './FeatureSection'
 import GiftBasketsSection from './GiftBasketsSection'
@@ -13,13 +13,13 @@ const Home = () => {
   return (
     <>
     <HomeSection/>
-    <ProductCarousel/>
-    {/* <FlashSales/> */}
     <CategorySlider/>
-    {/* <BestSellingProducts/> */}
+    <ProductCarousel/>
+   
+  
     <GiftBasketsSection/>
     <HeroBanner/>
-    <ProductSection/>
+   
     <NewArrivalSection/>
     <FeatureSection/>
     </>

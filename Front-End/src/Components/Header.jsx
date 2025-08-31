@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "../assets/Images/logo.png"
+import logo from "../assets/Images/logo.png";
 import {
   AiOutlineMenu,
   AiOutlineClose,
@@ -7,16 +7,19 @@ import {
   AiOutlineHeart,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import TopHeader from "./TopHeader";
 import UserDropdown from "./UserDropdown";
+import { useSearch } from "../Pages/Search/SearchContext"; // ✅ search context
 
 export default function Header() {
+  const { searchQuery, setSearchQuery } = useSearch();
   const [navOpen, setNavOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const navigate = useNavigate();
 
   const cartCount = useSelector((state) => state.cart.items.length);
 
@@ -24,13 +27,8 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 80) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
+      setIsSticky(window.scrollY > 80);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -41,14 +39,19 @@ export default function Header() {
         setHeaderHeight(headerRef.current.offsetHeight);
       }
     };
-
     updateHeaderHeight();
     window.addEventListener("resize", updateHeaderHeight);
-
     return () => window.removeEventListener("resize", updateHeaderHeight);
   }, []);
 
   const toggleNav = () => setNavOpen(!navOpen);
+
+  // ✅ search submit handler
+  const handleSearch = (e) => {
+    if (e.key === "Enter" || e.type === "click") {
+      navigate("/shop"); // redirect to shop page
+    }
+  };
 
   return (
     <>
@@ -79,20 +82,16 @@ export default function Header() {
 
         <header className="w-full bg-white">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-           <div className="text-xl font-bold">
-  <Link to="/">
-   <div className="flex items-center h-10"> 
-  <Link to="/">
-    <img
-      src={logo}
-      alt="Bloom and Beyond Logo"
-      className="h-full max-h-50 w-auto object-contain"
-    />
-  </Link>
-</div>
-  </Link>
-</div>
-
+            {/* ✅ Fixed logo double <Link> issue */}
+            <div className="text-xl font-bold">
+              <Link to="/" className="flex items-center h-10">
+                <img
+                  src={logo}
+                  alt="Bloom and Beyond Logo"
+                  className="h-60 max-h-50 w-60 object-contain"
+                />
+              </Link>
+            </div>
 
             {/* ✅ Desktop Navigation */}
             <nav className="hidden md:flex space-x-6 text-gray-700">
@@ -108,14 +107,22 @@ export default function Header() {
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
+              {/* ✅ Search Bar */}
               <div className="relative">
                 <input
                   type="text"
                   placeholder="What are you looking for?"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleSearch} // 👈 Enter key press
                   className="border border-gray-300 rounded-full py-1 px-3 pr-8 focus:outline-none focus:border-blue-500 text-sm"
                 />
-                <AiOutlineSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer" />
+                <AiOutlineSearch
+                  onClick={handleSearch} // 👈 Click icon
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+                />
               </div>
+
               <AiOutlineHeart className="text-xl text-gray-600 hover:text-red-500 cursor-pointer" />
               <Link to="/cart" className="relative">
                 <AiOutlineShoppingCart className="text-xl text-gray-600 hover:text-blue-500 cursor-pointer" />
@@ -151,11 +158,21 @@ export default function Header() {
                 : "max-h-0 opacity-0 overflow-hidden"
             }`}
           >
-            <Link to="/" onClick={() => setNavOpen(false)}>Home</Link>
-            <Link to="/shop" onClick={() => setNavOpen(false)}>Shop</Link>
-            <Link to="/about" onClick={() => setNavOpen(false)}>About</Link>
-            <Link to="/contact" onClick={() => setNavOpen(false)}>Contact</Link>
-            <Link to="/signup" onClick={() => setNavOpen(false)}>Signup</Link>
+            <Link to="/" onClick={() => setNavOpen(false)}>
+              Home
+            </Link>
+            <Link to="/shop" onClick={() => setNavOpen(false)}>
+              Shop
+            </Link>
+            <Link to="/about" onClick={() => setNavOpen(false)}>
+              About
+            </Link>
+            <Link to="/contact" onClick={() => setNavOpen(false)}>
+              Contact
+            </Link>
+            <Link to="/signup" onClick={() => setNavOpen(false)}>
+              Signup
+            </Link>
           </div>
         </header>
       </div>

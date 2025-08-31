@@ -11,12 +11,7 @@ import CartPage from '../Pages/CartPage';
 import Login from '../Pages/Login/Login'
 
 import ProductDetailPage from '../Pages/Product Detail page/ProductDetailPage'
-import Chocolate from '../Pages/Categories/Chocolate'
-import Flower from '../Pages/Categories/Flower'
-import Money from '../Pages/Categories/Money'
-import Makeup from '../Pages/Categories/Makeup'
-import Gift from '../Pages/Categories/Gift'
-import Fresh from '../Pages/Categories/Fresh'
+
 import Shop from '../Pages/Shop/Shop'
 const Main_routes = () => {
   return (
@@ -31,12 +26,7 @@ const Main_routes = () => {
      <Route path='/signup/login' element={<Login/>} />
      <Route path='/cart' element={<CartPage/>} />
      <Route path='*' element={<PageNotFound/>} />
-     <Route path='/chocolate-bouquet' element={<Chocolate/>} />
-     <Route path='/flower-bouquet' element={<Flower/>} />
-     <Route path='/money-bouquet' element={<Money/>} />
-     <Route path='/makeup-bouquet' element={<Makeup/>} />
-     <Route path='/gift-basket' element={<Gift/>} />
-     <Route path='/fresh-flowers' element={<Fresh/>} />
+   
      <Route path='/shop' element={<Shop/>} />
      <Route path="/product/:id" element={<ProductDetailPage/>} />
 

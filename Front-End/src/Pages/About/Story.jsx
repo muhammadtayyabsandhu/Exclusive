@@ -7,7 +7,7 @@ const Story = () => {
       <div className="container mx-auto px-4 py-4">
         <p className="text-sm text-gray-500">
           Home <span className="mx-1">/</span>
-          <span >About</span>
+          <span>About</span>
         </p>
       </div>
 
@@ -17,25 +17,26 @@ const Story = () => {
         <div className="md:w-1/2">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Story</h2>
           <p className="text-gray-600 leading-relaxed mb-4">
-            Launched in 2015, Exclusive is South Asia’s premier online shopping
-            marketplace with an active presence in Bangladesh. Supported by a
-            wide range of tailored marketing data and service solutions,
-            Exclusive has 10,500 sellers and 300 brands and serves 3 million
-            customers across the region.
+            Started with a simple love for flowers, our journey began with the
+            idea of bringing happiness and emotions beautifully wrapped in every
+            bouquet. What started as a small flower shop has now blossomed into
+            an online destination for unique floral creations, chocolate
+            bouquets, money bouquets, and customized gift baskets.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            Exclusive has more than 1 Million products to offer, growing at a
-            very fast pace. Exclusive offers a diverse assortment in categories
-            ranging from consumer goods to electronics.
+            We believe that every bouquet tells a story — of love, care,
+            celebration, or even comfort. With fresh flowers sourced daily and
+            creative arrangements handcrafted by our team, we’ve delivered joy
+            to thousands of customers. Our mission is simple: to make every
+            occasion memorable with the perfect bouquet.
           </p>
         </div>
 
         {/* Image Section */}
         <div className="md:w-1/2 pl-20">
-          {/* Replace the src with your actual image URL */}
           <img
-            src="src\assets\Images\story.png"
-            alt="Two people shopping"
+            src="https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619208/IMG-20250819-WA0014_zywke7.jpg"
+            alt="Beautiful flower bouquet"
             className="w-100 h-100 rounded"
           />
         </div>

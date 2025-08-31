@@ -5,12 +5,13 @@ import { Autoplay, FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 
-import flower1 from "../../assets/Images/flower/f6.jpg";
-import flower2 from "../../assets/Images/flower/f7.jpg";
-import flower3 from "../../assets/Images/flower/f9.jpg";
-import flower4 from "../../assets/Images/flower/f8.jpg";
+// direct links use karo
+const flowers = [
+  "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756621556/Adobe_Express_-_file_2_vrvb2i.png",
+  "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756621423/Remove_background_project_1_qfi2xi.png",
+  "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1755573574/Adobe_Express_-_file_a86yxp.png",
 
-const flowers = [flower1, flower2, flower3, flower4];
+];
 
 export default function HeroBanner() {
   return (
@@ -23,19 +24,19 @@ export default function HeroBanner() {
         freeMode={true}
         allowTouchMove={false}
         autoplay={{
-          delay: 1, // delay 1ms rakhna continuous banane ke liye
+          delay: 1, // continuous
           disableOnInteraction: false,
           pauseOnMouseEnter: false,
         }}
-        speed={4000} // jitna zyada utna smooth
+        speed={4000} // smooth
       >
         {flowers.concat(flowers).map((flower, index) => (
           <SwiperSlide key={index}>
             <div className="flex justify-center items-center">
               <img
-                src={"https://res.cloudinary.com/dyfgyhy2v/image/upload/v1755573574/Adobe_Express_-_file_a86yxp.png"}
+                src={flower}
                 alt={`flower-${index}`}
-                className="w-48 h-48 object-contain"
+                className="w-48 h-48 object-contain rounded-xl"
               />
             </div>
           </SwiperSlide>
