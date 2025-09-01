@@ -44,10 +44,10 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-3">Navigate</h3>
             <ul className="space-y-1 text-sm">
               <li><a href="#" className="hover:text-pink-600">Home</a></li>
-              <li><a href="#" className="hover:text-pink-600">Shop</a></li>
-              <li><a href="#" className="hover:text-pink-600">My&nbsp;Account</a></li>
-              <li><a href="#" className="hover:text-pink-600">Contact</a></li>
-              <li><a href="#" className="hover:text-pink-600">FAQs</a></li>
+              <li><a href="/shop" className="hover:text-pink-600">Shop</a></li>
+    
+              <li><a href="/contact" className="hover:text-pink-600">Contact</a></li>
+            
             </ul>
           </div>
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
-import hero1 from "../assets/Images/flower/f8.jpg";
-import hero2 from "../assets/Images/flower/f7.jpg";
-import hero3 from "../assets/Images/flower/f6.jpg";
+import hero1 from "../assets/Images/flower/f9.jpg";
+import hero2 from "../assets/Images/flower/f10.jpg";
+import hero3 from "../assets/Images/flower/f11.jpg";
 
 const slidesData = [hero1, hero2, hero3];
 
@@ -38,7 +38,7 @@ export default function Slider() {
       {/* Right side line + button */}
       <div className="absolute right-6 bottom-12 text-right z-20">
         <p className="text-black md:text-lg font-semibold">
-          🌸 Fresh Flowers, Fresh Smiles
+          
         </p>
         <div className="flex justify-end pr-12">
               <button

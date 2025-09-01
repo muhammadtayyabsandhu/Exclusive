@@ -47,7 +47,7 @@ const Contact = () => {
                 We are available 24/7, 7 days a week.
               </p>
               <p className="text-gray-600 text-sm mt-2">
-                <span className="font-medium">Phone:</span> +8801112222
+                <span className="font-medium">Phone:</span> +92335-8474477
               </p>
             </div>
 
@@ -61,11 +61,9 @@ const Contact = () => {
                 Fill out our form and we will contact you within 24 hours.
               </p>
               <p className="text-gray-600 text-sm mt-2">
-                <span className="font-medium">Emails:</span> [email protected]
+                <span className="font-medium">Emails:</span> [bloomandbeyond8@gmail.com]
               </p>
-              <p className="text-gray-600 text-sm">
-                <span className="font-medium">Emails:</span> [email protected]
-              </p>
+              
             </div>
           </div>
 
