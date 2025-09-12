@@ -174,7 +174,7 @@ export default function Header() {
               Signup
             </Link>
             <Link to="/cart" onClick={() => setNavOpen(false)}>
-              Signup
+            Add To Cart
             </Link>
           </div>
         </header>
