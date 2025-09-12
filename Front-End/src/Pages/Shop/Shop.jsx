@@ -1,167 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSearch } from "../Search/SearchContext";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Features/cartSlice";
 import { toast } from "react-toastify";
-const categories = ["chocolate", "money", "flower", "makeup", "gift", "fresh"];
+import { Smile, Frown, Heart, Gift, Sparkles, Leaf } from "lucide-react";
+
+// 👇 Mapping moods to categories
+const moodCategoryMap = {
+  happy: "flower",
+  sad: "chocolate",
+  love: "gift",
+  surprise: "money",
+  beauty: "makeup",
+  fresh: "fresh",
+};
 
 const products = [
-  {
-    id: 1,
-    name: "Luxury Chocolate Bouquet",
-    price: 50,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619247/IMG-20250819-WA0025_kcqzqu.jpg",
-    category: "chocolate",
-  },
-  {
-    id: 2,
-    name: "Ferrero Rocher Bouquet",
-    price: 65,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619288/IMG-20250819-WA0028_vs1dt9.jpg",
-    category: "chocolate",
-  },
-  {
-    id: 3,
-    name: "Mixed Chocolate Surprise",
-    price: 40,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619206/IMG-20250819-WA0000_yko1nn.jpg",
-    category: "chocolate",
-  },
-  {
-    id: 4,
-    name: "Premium Money Bouquet",
-    price: 120,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619207/IMG-20250819-WA0007_z1rd5r.jpg",
-    category: "money",
-  },
-  {
-    id: 5,
-    name: "Elegant Cash Flower",
-    price: 100,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619207/IMG-20250819-WA0005_xb5lyx.jpg",
-    category: "money",
-  },
-  {
-    id: 6,
-    name: "Red Rose Bouquet",
-    price: 35,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619212/IMG-20250819-WA0016_jljfs1.jpg",
-    category: "flower",
-  },
-  {
-    id: 7,
-    name: "Tulip Fresh Blooms",
-    price: 45,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619221/IMG-20250819-WA0020_jrcfun.jpg",
-    category: "flower",
-  },
-  {
-    id: 8,
-    name: "Luxury Makeup Kit",
-    price: 80,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619208/IMG-20250819-WA0015_bcmet9.jpg",
-    category: "makeup",
-  },
-  {
-    id: 9,
-    name: "Beauty Essentials Pack",
-    price: 95,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619232/IMG-20250819-WA0024_i4nvce.jpg",
-    category: "makeup",
-  },
-  {
-    id: 10,
-    name: "Luxury Gift Basket",
-    price: 130,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619307/IMG-20250819-WA0032_tqwb4u.jpg",
-    category: "gift",
-  },
-  {
-    id: 11,
-    name: "Surprise Hamper",
-    price: 110,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619296/IMG-20250819-WA0030_th2bra.jpg",
-    category: "gift",
-  },
-  {
-    id: 12,
-    name: "Fresh Fruit Basket",
-    price: 55,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619310/IMG-20250819-WA0035_uziwav.jpg",
-    category: "fresh",
-  },
-  {
-    id: 13,
-    name: "Healthy Green Basket",
-    price: 60,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619320/IMG-20250819-WA0036_ctvqye.jpg",
-    category: "fresh",
-  },
-  {
-    id: 14,
-    name: "smile flower",
-    price: 60,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619212/IMG-20250819-WA0016_jljfs1.jpg",
-    category: "flower",
-  },
-  {
-    id: 15,
-    name: "Beauty Essentials Pack",
-    price: 95,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619208/IMG-20250819-WA0014_zywke7.jpg",
-    category: "makeup",
-  },
-  {
-    id: 16,
-    name: "Beauty Essentials Pack",
-    price: 95,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619208/IMG-20250819-WA0011_jrmwwy.jpg",
-    category: "makeup",
-  },
+  { id: 1, name: "Luxury Chocolate Bouquet", price: 50, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619247/IMG-20250819-WA0025_kcqzqu.jpg", category: "chocolate" },
+  { id: 2, name: "Ferrero Rocher Bouquet", price: 65, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619288/IMG-20250819-WA0028_vs1dt9.jpg", category: "chocolate" },
+  { id: 3, name: "Mixed Chocolate Surprise", price: 40, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619206/IMG-20250819-WA0000_yko1nn.jpg", category: "chocolate" },
+  { id: 4, name: "Premium Money Bouquet", price: 120, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619207/IMG-20250819-WA0007_z1rd5r.jpg", category: "money" },
+  { id: 5, name: "Elegant Cash Flower", price: 100, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619207/IMG-20250819-WA0005_xb5lyx.jpg", category: "money" },
+  { id: 6, name: "Red Rose Bouquet", price: 35, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619212/IMG-20250819-WA0016_jljfs1.jpg", category: "flower" },
+  { id: 7, name: "Tulip Fresh Blooms", price: 45, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619221/IMG-20250819-WA0020_jrcfun.jpg", category: "flower" },
+  { id: 8, name: "Luxury Makeup Kit", price: 80, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619208/IMG-20250819-WA0015_bcmet9.jpg", category: "makeup" },
+  { id: 9, name: "Beauty Essentials Pack", price: 95, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619232/IMG-20250819-WA0024_i4nvce.jpg", category: "makeup" },
+  { id: 10, name: "Luxury Gift Basket", price: 130, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619307/IMG-20250819-WA0032_tqwb4u.jpg", category: "gift" },
+  { id: 11, name: "Surprise Hamper", price: 110, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619296/IMG-20250819-WA0030_th2bra.jpg", category: "gift" },
+  { id: 12, name: "Fresh Fruit Basket", price: 55, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619310/IMG-20250819-WA0035_uziwav.jpg", category: "fresh" },
+  { id: 13, name: "Healthy Green Basket", price: 60, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619320/IMG-20250819-WA0036_ctvqye.jpg", category: "fresh" },
+  { id: 14, name: "smile flower", price: 60, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619212/IMG-20250819-WA0016_jljfs1.jpg", category: "flower" },
+  { id: 15, name: "Beauty Essentials Pack", price: 95, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619208/IMG-20250819-WA0014_zywke7.jpg", category: "makeup" },
+  { id: 16, name: "Beauty Essentials Pack", price: 95, image: "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1756619208/IMG-20250819-WA0011_jrmwwy.jpg", category: "makeup" },
 ];
 
 const Shop = () => {
   const dispatch = useDispatch();
-
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-
-    // 👇 yaha notification trigger karo
-    toast.success(`${product.name} added to cart!`);
-  };
   const { searchQuery } = useSearch();
   const location = useLocation();
 
+  const [sortOption, setSortOption] = useState("default");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedMood, setSelectedMood] = useState("");
+  const [showPopup, setShowPopup] = useState(false); // default false
+
+  const productsPerPage = 6;
+
+  // query param se category nikalna
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get("category");
 
-  const [sortOption, setSortOption] = useState("default");
-  const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 6;
+  // agar category param nahi hai to popup show karo
+  useEffect(() => {
+    if (!category) {
+      setShowPopup(true);
+    } else {
+      setShowPopup(false);
+    }
+  }, [category]);
 
+  // Add to Cart
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    toast.success(`${product.name} added to cart!`);
+  };
+
+  // Products filter
   const filteredProducts = products.filter((p) => {
+    const moodCategory = selectedMood ? moodCategoryMap[selectedMood] : null;
+    const matchMood = moodCategory ? p.category === moodCategory : true;
     const matchCategory = category ? p.category === category : true;
-    const matchSearch = p.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    return matchCategory && matchSearch;
+    const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchMood && matchCategory && matchSearch;
   });
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -177,7 +88,91 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-5">
-      <h2 className="text-3xl font-bold text-center mb-8"></h2>
+      {/* Mood Popup */}
+   {/* Mood Popup */}
+{showPopup && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-md z-50">
+    <div className="bg-white/20 backdrop-blur-xl border border-white/30 rounded-3xl p-8 shadow-2xl w-[420px] text-center animate-fadeIn">
+      <h2 className="text-2xl font-extrabold mb-6 text-gray-800 drop-shadow">
+        Select Your Mood 🎭
+      </h2>
+
+      <div className="grid grid-cols-2 gap-4">
+        <button
+          onClick={() => {
+            setSelectedMood("happy");
+            setShowPopup(false);
+          }}
+          className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-green-400 to-emerald-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all"
+        >
+          <Smile size={20} /> Happy
+        </button>
+
+        <button
+          onClick={() => {
+            setSelectedMood("sad");
+            setShowPopup(false);
+          }}
+          className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-blue-400 to-indigo-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all"
+        >
+          <Frown size={20} /> Sad
+        </button>
+
+        <button
+          onClick={() => {
+            setSelectedMood("love");
+            setShowPopup(false);
+          }}
+          className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-pink-400 to-rose-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all"
+        >
+          <Heart size={20} /> Love
+        </button>
+
+        <button
+          onClick={() => {
+            setSelectedMood("surprise");
+            setShowPopup(false);
+          }}
+          className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-purple-400 to-fuchsia-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all"
+        >
+          <Gift size={20} /> Surprise
+        </button>
+
+        <button
+          onClick={() => {
+            setSelectedMood("beauty");
+            setShowPopup(false);
+          }}
+          className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-orange-400 to-red-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all"
+        >
+          <Sparkles size={20} /> Beauty
+        </button>
+
+        <button
+          onClick={() => {
+            setSelectedMood("fresh");
+            setShowPopup(false);
+          }}
+          className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-lime-400 to-green-600 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all"
+        >
+          <Leaf size={20} /> Fresh
+        </button>
+
+        {/* 👇 All Products Button */}
+        <button
+          onClick={() => {
+            setSelectedMood(""); // saari products show
+            setShowPopup(false);
+          }}
+          className="col-span-2 flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-gray-400 to-gray-600 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all"
+        >
+           All Products
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
       {/* Sort Dropdown */}
       <div className="flex justify-end max-w-6xl mx-auto mb-6">
@@ -203,23 +198,13 @@ const Shop = () => {
               key={product.id}
               className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-52 object-cover"
-              />
+              <img src={product.image} alt={product.name} className="w-full h-52 object-cover" />
               <div className="p-5 flex flex-col items-center text-center">
-                <h2 className="text-xl font-semibold text-gray-800">
-                  {product.name}
-                </h2>
+                <h2 className="text-xl font-semibold text-gray-800">{product.name}</h2>
                 <p className="text-gray-600 mt-1">Rs {product.price}</p>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="
-                    w-full mt-4 bg-emerald-400 text-white
-                    py-2 rounded-full font-semibold
-                    hover:bg-emerald-500 transition
-                  "
+                  className="w-full mt-4 bg-emerald-400 text-white py-2 rounded-full font-semibold hover:bg-emerald-500 transition"
                 >
                   Add to Cart
                 </button>
@@ -227,9 +212,7 @@ const Shop = () => {
             </div>
           ))
         ) : (
-          <p className="col-span-3 text-center text-gray-500">
-            No products found
-          </p>
+          <p className="col-span-3 text-center text-gray-500">No products found</p>
         )}
       </div>
 
@@ -248,19 +231,16 @@ const Shop = () => {
             <button
               key={i}
               onClick={() => setCurrentPage(i + 1)}
-              className={`px-3 py-1 rounded-lg ${currentPage === i + 1
-                  ? "bg-emerald-400 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
-                }`}
+              className={`px-3 py-1 rounded-lg ${
+                currentPage === i + 1 ? "bg-emerald-400 text-white" : "bg-gray-200 hover:bg-gray-300"
+              }`}
             >
               {i + 1}
             </button>
           ))}
 
           <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             className="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300"
             disabled={currentPage === totalPages}
           >

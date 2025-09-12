@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
-import hero1 from "../assets/Images/flower/f9.jpg";
+
 import hero2 from "../assets/Images/flower/f10.jpg";
 import hero3 from "../assets/Images/flower/f11.jpg";
 
-const slidesData = [hero1, hero2, hero3];
+const slidesData = [ hero2, hero3];
 
 export default function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
