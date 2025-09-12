@@ -13,6 +13,7 @@ import Login from '../Pages/Login/Login'
 import ProductDetailPage from '../Pages/Product Detail page/ProductDetailPage'
 
 import Shop from '../Pages/Shop/Shop'
+import CheckoutPage from '../Pages/CheckoutPage'
 const Main_routes = () => {
   return (
    <>
@@ -30,7 +31,7 @@ const Main_routes = () => {
      <Route path='/shop' element={<Shop/>} />
      <Route path="/product/:id" element={<ProductDetailPage/>} />
 
-
+ <Route path="/checkout" element={<CheckoutPage/> } /> 
     
 
      <Route path='/signup' element={<Signup/>} />

@@ -4,7 +4,7 @@ import {
   AiOutlineMenu,
   AiOutlineClose,
   AiOutlineSearch,
-  AiOutlineHeart,
+ 
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
@@ -123,7 +123,7 @@ export default function Header() {
                 />
               </div>
 
-              <AiOutlineHeart className="text-xl text-gray-600 hover:text-red-500 cursor-pointer" />
+     
               <Link to="/cart" className="relative">
                 <AiOutlineShoppingCart className="text-xl text-gray-600 hover:text-blue-500 cursor-pointer" />
                 {cartCount > 0 && (
