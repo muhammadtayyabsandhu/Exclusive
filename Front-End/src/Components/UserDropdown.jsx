@@ -2,28 +2,23 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   AiOutlineUser,
-  AiOutlineSetting,
-  AiOutlineShopping,
-  AiOutlineCloseCircle,
-  AiOutlineMessage,
   AiOutlineLogout,
+  AiOutlineDashboard,
 } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  // Logout Functionality
-  const handleLogout = () => {
-    localStorage.removeItem("user"); // 'auth' variable clear ho jayega
-    navigate("/signup/login"); // Redirect to login page
-  };
+  const role = user?.user?.role; // backend structure me `user.role`
 
   return (
     <div className="relative">
       <div
-        className="text-xl text-gray-600 hover:text-red-500 cursor-pointer"
+        className="text-xl text-gray-700 hover:text-red-500 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         <AiOutlineUser />
@@ -35,45 +30,30 @@ export default function UserDropdown() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="absolute right-0 mt-2 w-48 bg-white/30 shadow-lg rounded-lg py-2 backdrop-blur-lg border border-white/20 z-50"
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="absolute right-0 mt-2 w-52 bg-white shadow-lg rounded-xl py-3 border border-gray-200 z-50"
             onMouseLeave={() => setIsOpen(false)}
           >
-            <Link
-              to="/account"
-              className="flex items-center space-x-2 px-4 py-2 hover:bg-white/20 cursor-pointer text-white"
-            >
-              <AiOutlineSetting className="text-white" />
-              <span>Manage My Account</span>
-            </Link>
-            <Link
-              to="/orders"
-              className="flex items-center space-x-2 px-4 py-2 hover:bg-white/20 cursor-pointer text-white"
-            >
-              <AiOutlineShopping className="text-white" />
-              <span>My Order</span>
-            </Link>
-            <Link
-              to="/cancellations"
-              className="flex items-center space-x-2 px-4 py-2 hover:bg-white/20 cursor-pointer text-white"
-            >
-              <AiOutlineCloseCircle className="text-white" />
-              <span>My Cancellations</span>
-            </Link>
-            <Link
-              to="/reviews"
-              className="flex items-center space-x-2 px-4 py-2 hover:bg-white/20 cursor-pointer text-white"
-            >
-              <AiOutlineMessage className="text-white" />
-              <span>My Reviews</span>
-            </Link>
+            {/* ✅ Dashboard - only for admin */}
+            {role === "admin" && (
+              <div
+                onClick={() => navigate("/admin/dashboard")}
+                className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+              >
+                <AiOutlineDashboard />
+                <span>Dashboard</span>
+              </div>
+            )}
 
-            {/* Logout Button with Functionality */}
+            {/* ✅ Logout */}
             <div
-              onClick={handleLogout}
-              className="flex items-center space-x-2 px-4 py-2 hover:bg-white/20 cursor-pointer text-red-400 border-t border-white/20"
+              onClick={() => {
+                logout();
+                navigate("/login");
+              }}
+              className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500 font-medium border-t border-gray-200"
             >
-              <AiOutlineLogout className="text-red-400" />
+              <AiOutlineLogout />
               <span>Logout</span>
             </div>
           </motion.div>

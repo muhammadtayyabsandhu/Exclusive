@@ -1,55 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Features/cartSlice";
-import { toast } from "react-toastify";   // 👈 import toast
-
-const products = [
-  {
-    id: 1,
-    name: "Rose Paradise",
-    price: 1499,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1751806538/WhatsApp_Image_2025-07-06_at_16.39.02_668a189a_qjvwfs.jpg",
-  },
-  {
-    id: 2,
-    name: "Choco Love Basket",
-    price: 1899,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1751806537/WhatsApp_Image_2025-07-06_at_16.39.02_8efe2274_i7whzk.jpg",
-  },
-  {
-    id: 3,
-    name: "Mini Bloom Box",
-    price: 999,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1751806537/WhatsApp_Image_2025-07-06_at_16.39.01_740805a1_uozomh.jpg",
-  },
-  {
-    id: 3,
-    name: "Mini Bloom Box",
-    price: 999,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1751806537/WhatsApp_Image_2025-07-06_at_16.39.01_740805a1_uozomh.jpg",
-  },
-  {
-    id: 3,
-    name: "Mini Bloom Box",
-    price: 999,
-    image:
-      "https://res.cloudinary.com/dyfgyhy2v/image/upload/v1751806537/WhatsApp_Image_2025-07-06_at_16.39.01_740805a1_uozomh.jpg",
-  },
-];
+import { toast } from "react-toastify";
+import axios from "axios";
 
 export default function ProductCarousel() {
   const dispatch = useDispatch();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch products from backend
+  const fetchProducts = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:5000/api/v1/products");
+      setProducts(data.products || []);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      toast.error("❌ Failed to load products");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-
-    // 👇 yaha notification trigger karo
-    toast.success(`${product.name} added to cart!`);
+    toast.success(`${product.title || product.name} added to cart!`);
   };
+
+  if (loading) {
+    return <p className="text-center py-10">Loading products...</p>;
+  }
 
   return (
     <section className="py-8 bg-pink-50">
@@ -69,7 +53,7 @@ export default function ProductCarousel() {
         >
           {products.map((p) => (
             <div
-              key={p.id}
+              key={p._id}
               className="
                 min-w-[220px] lg:min-w-[260px] snap-start
                 bg-white rounded-2xl shadow hover:shadow-lg transition
@@ -78,14 +62,14 @@ export default function ProductCarousel() {
             >
               <img
                 src={p.image}
-                alt={p.name}
+                alt={p.title}
                 className="h-40 w-full object-cover rounded-t-2xl"
               />
 
               <div className="p-4 text-center">
-                <h3 className="font-semibold text-black">{p.name}</h3>
+                <h3 className="font-semibold text-black">{p.title}</h3>
                 <p className="text-pink-700 font-medium mt-1">
-                  Rs&nbsp;{p.price}
+                  Rs&nbsp;{p.new_price}
                 </p>
 
                 <button

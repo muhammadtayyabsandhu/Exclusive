@@ -1,9 +1,11 @@
+// index.js
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import connect from "../../config/db.js"; // path adjust karo api folder ke hisaab se
-import userRoutes from "../../Router/UserRoute.js";
-import productRoutes from "../../Router/productRoute.js";
+import connect from "./config/db.js"; // MongoDB connection
+import userRoutes from "./routes/UserRoute.js"; 
+import productRouter from "./routes/productRouter.js";
+import orderRouter from "./routes/orderRoute.js"
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 dotenv.config();
@@ -15,8 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/users", userRoutes);
-app.use("/api/products", productRoutes);
-
+app.use("/api/v1/products", productRouter);
+app.use("/api/v1/order", orderRouter);
 // Gemini AI setup
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -34,13 +36,17 @@ app.post("/api/bouquet-ai", async (req, res) => {
   }
 });
 
-// Vercel serverless handler
-export default async function handler(req, res) {
-  try {
-    await connect(); // DB connect har request pe
-    return app(req, res); // Express app ko handle karne do
-  } catch (err) {
-    console.error("❌ MongoDB error:", err.message);
-    return res.status(500).json({ error: "Internal Server Error" });
-  }
-}
+// PORT
+const PORT = process.env.PORT || 5000;
+
+// MongoDB connect aur server start
+connect()
+  .then(() => {
+    console.log("✅ MongoDB connected");
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection failed:", err.message);
+  });

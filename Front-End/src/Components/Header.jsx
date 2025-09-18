@@ -4,7 +4,6 @@ import {
   AiOutlineMenu,
   AiOutlineClose,
   AiOutlineSearch,
- 
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,7 +21,6 @@ export default function Header() {
   const navigate = useNavigate();
 
   const cartCount = useSelector((state) => state.cart.items.length);
-
   const headerRef = React.useRef(null);
 
   useEffect(() => {
@@ -82,7 +80,7 @@ export default function Header() {
 
         <header className="w-full bg-white">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            {/* ✅ Fixed logo double <Link> issue */}
+            {/* ✅ Logo */}
             <div className="text-xl font-bold">
               <Link to="/" className="flex items-center h-10">
                 <img
@@ -106,24 +104,25 @@ export default function Header() {
               ))}
             </nav>
 
+            {/* ✅ Right Section */}
             <div className="hidden md:flex items-center space-x-4">
-              {/* ✅ Search Bar */}
+              {/* Search */}
               <div className="relative">
                 <input
                   type="text"
                   placeholder="What are you looking for?"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={handleSearch} // 👈 Enter key press
+                  onKeyDown={handleSearch}
                   className="border border-gray-300 rounded-full py-1 px-3 pr-8 focus:outline-none focus:border-blue-500 text-sm"
                 />
                 <AiOutlineSearch
-                  onClick={handleSearch} // 👈 Click icon
+                  onClick={handleSearch}
                   className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
                 />
               </div>
 
-     
+              {/* Cart */}
               <Link to="/cart" className="relative">
                 <AiOutlineShoppingCart className="text-xl text-gray-600 hover:text-blue-500 cursor-pointer" />
                 {cartCount > 0 && (
@@ -132,9 +131,12 @@ export default function Header() {
                   </span>
                 )}
               </Link>
+
+              {/* ✅ User Dropdown */}
               <UserDropdown />
             </div>
 
+            {/* ✅ Mobile Menu Toggle */}
             <div className="md:hidden">
               {navOpen ? (
                 <AiOutlineClose
@@ -174,7 +176,7 @@ export default function Header() {
               Signup
             </Link>
             <Link to="/cart" onClick={() => setNavOpen(false)}>
-            Add To Cart
+              Add To Cart
             </Link>
           </div>
         </header>
